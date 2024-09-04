@@ -1,0 +1,109 @@
+<html xmlns:th="http://thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <title>Register</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .main {
+            padding: 20px;
+            margin-top: 4%;
+        }
+
+        @media screen and (max-width: 450px) {
+            .main {
+                padding: 10px;
+            }
+        }
+
+        @media screen and (min-width: 768px) {
+            .main {
+                margin-left: auto;
+                margin-right: auto;
+                width: 50%;
+            }
+        }
+
+        .card {
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-body {
+            padding: 2rem;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+            border-radius: 25px;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            border: none;
+            border-radius: 25px;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .btn-secondary:hover, .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .text-muted {
+            color: #6c757d !important;
+        }
+
+        .text-danger {
+            font-size: 14px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+<section layout:fragment="body">
+    <div class="main">
+        <div class="col-md-12">
+            <div th:if="${param.fail}" class="alert alert-danger">
+                Username or email already exists
+            </div>
+            <div class="register-form">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="text-center text-muted">• REGISTER •</h2>
+                        <form method="post" role="form" th:action="@{/register/save}" th:object="${user}">
+                            <div class="form-group">
+                                <label for="username">Username:</label>
+                                <input type="text" class="form-control" id="username" placeholder="Username"
+                                       th:field="*{username}" required>
+                                <p th:if="${#fields.hasErrors('username')}" class="text-danger">Invalid Username</p>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email:</label>
+                                <input type="email" class="form-control" id="email" placeholder="Email" th:field="*{email}"
+                                       required>
+                                <p th:if="${#fields.hasErrors('email')}" class="text-danger">Invalid Email</p>
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password:</label>
+                                <input type="password" class="form-control" id="password" placeholder="Password"
+                                       th:field="*{password}" required>
+                                <p th:if="${#fields.hasErrors('password')}" class="text-danger">Invalid Password</p>
+                            </div>
+                            <div class="d-flex justify-content-between mt-4">
+                                <a th:href="@{/login}" class="btn btn-primary">LOGIN HERE</a>
+                                <button type="submit" class="btn btn-secondary">REGISTER</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

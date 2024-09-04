@@ -1,0 +1,52 @@
+<html xmlns:th="http://thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+  <title>Clubs Create</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="d-flex flex-column h-100">
+<main class="flex-shrink-0">
+  <section layout:fragment="body" class="py-5">
+    <div class="container">
+      <div class="card">
+        <div class="card-body">
+          <h2 class="text-center text-muted mb-4">• CREATE-CLUB •</h2>
+          <form role="form" method="post" th:action="@{/clubs/new}" th:object="${club}">
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="title">Title:</label>
+                <input type="text" class="form-control" id="title" name="title" th:field="*{title}"
+                       placeholder="Title" required>
+                <p th:if="${#fields.hasErrors('title')}" class="text-danger" th:errors="*{title}"></p>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="photoUrl">Photo URL:</label>
+                <input type="text" class="form-control" id="photoUrl" name="photoUrl"
+                       th:field="*{photoUrl}" placeholder="Photo URL" required>
+                <p th:if="${#fields.hasErrors('photoUrl')}" class="text-danger"
+                   th:errors="*{photoUrl}"></p>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="content">Content:</label>
+              <textarea class="form-control" id="content" name="content" th:field="*{content}"
+                        placeholder="Enter the club content here..." rows="4" required></textarea>
+              <p th:if="${#fields.hasErrors('content')}" class="text-danger" th:errors="*{content}"></p>
+            </div>
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary">CREATE</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<!-- The footer remains unchanged -->
+<footer class="footer mt-auto py-3 bg-light">
+  <div class="container">
+    <span class="text-muted">Place sticky footer content here.</span>
+  </div>
+</footer>
+</body>
+</html>

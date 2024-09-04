@@ -1,0 +1,79 @@
+<html
+        xmlns:th="http://thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+<head>
+  <title>Club Edit</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+        background-color: #f8f9fa;
+    }
+    .form-container {
+        background-color: #ffffff;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .form-group label {
+        font-weight: bold;
+    }
+    .btn-primary {
+        border-radius: 50px;
+        padding: 10px 20px;
+        font-size: 16px;
+    }
+  </style>
+</head>
+<body class="d-flex flex-column h-100">
+<main class="flex-shrink-0">
+  <section layout:fragment="body" class="py-5">
+    <div class="container">
+      <div class="form-container">
+        <h1 class="mb-4 text-center">• CLUB EVENT •</h1>
+        <form role="form" method="post" th:action="@{/clubs/{clubId}/edit(clubId=${club.id})}" th:object="${club}">
+          <input type="hidden" th:field="*{id}">
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="title">Title:</label>
+              <input
+                      type="text"
+                      class="form-control"
+                      id="title"
+                      name="title"
+                      th:field="*{title}"
+                      placeholder="Title">
+              <p th:if="${#fields.hasErrors('title')}" class="text-danger" th:errors="*{title}"></p>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="photoUrl">Photo URL:</label>
+              <input
+                      type="text"
+                      class="form-control"
+                      id="photoUrl"
+                      name="photoUrl"
+                      th:field="*{photoUrl}"
+                      placeholder="Photo URL">
+              <p th:if="${#fields.hasErrors('photoUrl')}" class="text-danger" th:errors="*{photoUrl}"></p>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="content">Content:</label>
+            <textarea
+                    class="form-control"
+                    id="content"
+                    name="content"
+                    rows="4"
+                    th:field="*{content}"
+                    placeholder="Enter club details..."></textarea>
+            <p th:if="${#fields.hasErrors('content')}" class="text-danger" th:errors="*{content}"></p>
+          </div>
+          <button type="submit" class="btn btn-primary">UPDATE CLUB</button>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+</body>
+</html>

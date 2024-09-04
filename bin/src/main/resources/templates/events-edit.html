@@ -1,0 +1,105 @@
+<html
+        xmlns:th="http://thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+<head>
+    <title>Event Edit</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .form-container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .form-group label {
+            font-weight: bold;
+        }
+        .btn-primary {
+            border-radius: 50px;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body class="d-flex flex-column h-100">
+<main class="flex-shrink-0">
+    <section layout:fragment="body" class="py-5">
+        <div class="container">
+            <div class="form-container">
+                <h1 class="mb-4 text-center">• EDIT EVENT •</h1>
+                <form role="form" method="post" th:action="@{/events/{eventId}/edit(eventId=${eventId})}" th:object="${event}">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="name">Name:</label>
+                            <input
+                                    type="text"
+                                    class="form-control"
+                                    id="name"
+                                    name="name"
+                                    th:field="*{name}"
+                                    placeholder="Event name">
+                            <p th:if="${#fields.hasErrors('name')}" class="text-danger" th:errors="*{name}"></p>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="type">Type:</label>
+                            <input
+                                    type="text"
+                                    class="form-control"
+                                    id="type"
+                                    name="type"
+                                    th:field="*{type}"
+                                    placeholder="Event type">
+                            <p th:if="${#fields.hasErrors('type')}" class="text-danger" th:errors="*{type}"></p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="photoUrl">Photo URL:</label>
+                        <input
+                                type="text"
+                                class="form-control"
+                                id="photoUrl"
+                                name="photoUrl"
+                                th:field="*{photoUrl}"
+                                placeholder="Photo URL">
+                        <p th:if="${#fields.hasErrors('photoUrl')}" class="text-danger" th:errors="*{photoUrl}"></p>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="startTime">Start Time:</label>
+                            <input
+                                    type="datetime-local"
+                                    class="form-control"
+                                    id="startTime"
+                                    name="startTime"
+                                    th:field="*{startTime}">
+                            <p th:if="${#fields.hasErrors('startTime')}" class="text-danger" th:errors="*{startTime}"></p>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="endTime">End Time:</label>
+                            <input
+                                    type="datetime-local"
+                                    class="form-control"
+                                    id="endTime"
+                                    name="endTime"
+                                    th:field="*{endTime}">
+                            <p th:if="${#fields.hasErrors('endTime')}" class="text-danger" th:errors="*{endTime}"></p>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">UPDATE EVENT</button>
+                </form>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer layout:fragment="footer" class="mt-auto py-3 bg-dark text-white text-center">
+    <!-- Footer content -->
+    <p>&copy; 2024 Your Company. All rights reserved.</p>
+</footer>
+</body>
+</html>
